@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject objectToFollow;
+    [SerializeField] private GameObject objectToFollow = null;
 
     [SerializeField] private float distanceFromScene = -10;
     

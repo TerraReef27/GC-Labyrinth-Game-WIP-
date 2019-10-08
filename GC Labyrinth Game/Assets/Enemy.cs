@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public float MoveSpeed { get; set; }
-    public float Health { get; set; }
+    [SerializeField] private float hp;
 
-    [SerializeField] private float health;
+    [SerializeField] public float MoveSpeed { get; set; }
+    public float Health { get { return hp; } set { hp = value; } }
+
+    
+    //public float health = 100f;
     [SerializeField] private float moveSpeed;
 
     void Start()

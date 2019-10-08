@@ -6,13 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Camera cam;
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer rend;
+    [SerializeField] private Rigidbody2D rb = null;
+    [SerializeField] private Camera cam = null;
+    [SerializeField] private Animator animator = null;
+    [SerializeField] private SpriteRenderer rend = null;
 
-    [SerializeField] private GameObject weapon;
-    [SerializeField] private GameObject cursor;
+    [SerializeField] private GameObject weapon = null;
+    [SerializeField] private GameObject cursor = null;
 
     Vector2 movement;
     Vector2 mousePos;

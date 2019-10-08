@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bullet = null;
+    [SerializeField] private Transform firePoint = null;
 
     [SerializeField] private float bulletSpeed = 10f;
 

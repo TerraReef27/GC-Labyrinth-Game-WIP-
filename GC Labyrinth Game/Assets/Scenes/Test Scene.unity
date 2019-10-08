@@ -31490,8 +31490,8 @@ GameObject:
   - component: {fileID: 1695975582}
   - component: {fileID: 1695975581}
   - component: {fileID: 1695975583}
-  - component: {fileID: 1695975580}
   - component: {fileID: 1695975584}
+  - component: {fileID: 1695975580}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -31508,9 +31508,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695975579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e644f0c17292e8f41a2b3af4af8e4bd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 28da0cc4ac28e954ab9eccf09a388c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 1695975584}
 --- !u!212 &1695975581
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31548,7 +31549,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -31568,7 +31569,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695975579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.17, y: 3.89, z: -5.290447}
+  m_LocalPosition: {x: 6.17, y: 3.89, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31609,9 +31610,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695975579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b2d96ca5b729b43b74161403c99b36, type: 3}
+  m_Script: {fileID: 11500000, guid: 107d14c3b3303994c9d46e7152ba7af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
+  moveSpeed: 0
 --- !u!1 &1757653796
 GameObject:
   m_ObjectHideFlags: 0
@@ -31788,7 +31791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027870414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9493623, y: -0.11219931, z: -3.856629}
+  m_LocalPosition: {x: 4.9493623, y: -0.11219931, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 377750256}
