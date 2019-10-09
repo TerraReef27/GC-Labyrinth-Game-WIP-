@@ -10,9 +10,14 @@ public class DamageHandler : MonoBehaviour
     {
         if(collision.gameObject.tag == "Attack")
         {
-            gameObject.GetComponent<Enemy>().Health -= collision.gameObject.GetComponent<Bullet>().Damage;
+            //gameObject.GetComponent<Enemy>().Health -= collision.gameObject.GetComponent<Bullet>().Damage;
             Debug.Log("Hit This");
             enemy.Health -= 10;
+
+            if(enemy.Health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Damage { get; set; }
-    private float damage = 10;
+    [SerializeField] float bulletSpeed = 50f;
+
+    [SerializeField] Rigidbody2D rb = null;
+    [SerializeField] Transform weapon = null;
 
     void Start()
     {
+        rb.AddForce(weapon.up * bulletSpeed, ForceMode2D.Impulse);
+
         StartCoroutine(Despawn());
     }
 

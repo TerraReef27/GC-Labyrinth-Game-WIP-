@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject weapon = null;
     [SerializeField] private GameObject cursor = null;
 
+    [SerializeField] private Entity_Attack attack = null;
+
     Vector2 movement;
     Vector2 mousePos;
     
@@ -40,6 +42,11 @@ public class PlayerController : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         cursor.transform.position = mousePos;
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            attack.Attack();
+        }
     }
 
     void FixedUpdate()

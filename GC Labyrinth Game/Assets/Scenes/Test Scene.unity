@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377750256}
   - component: {fileID: 377750257}
+  - component: {fileID: 377750258}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -200,6 +201,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &377750258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377750255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6966d4e9ae74c64cab966993bb60476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  name: Default Weapon
+  attack: {fileID: 2712676851294295516, guid: 478c3bf394e7db64cabd41ec5529b606, type: 3}
 --- !u!1 &570933137
 GameObject:
   m_ObjectHideFlags: 0
@@ -31399,6 +31415,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1156571350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156571351}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1156571351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156571350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1037998, y: 0.23376289, z: -6.54632}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694453876
 GameObject:
   m_ObjectHideFlags: 0
@@ -31808,12 +31854,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2027870414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 118922fc5a60a6b4ba6d2d78f43d1683, type: 3}
+  m_Script: {fileID: 11500000, guid: dc4b4a855fe3ef447b38df5d07badbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2712676851294295516, guid: 478c3bf394e7db64cabd41ec5529b606, type: 3}
-  firePoint: {fileID: 377750256}
-  bulletSpeed: 50
+  weapon: {fileID: 377750258}
+  attackCollector: {fileID: 1156571350}
 --- !u!50 &2027870418
 Rigidbody2D:
   serializedVersion: 4
@@ -31854,6 +31899,7 @@ MonoBehaviour:
   rend: {fileID: 2027870415}
   weapon: {fileID: 377750255}
   cursor: {fileID: 1694453876}
+  attack: {fileID: 2027870417}
 --- !u!95 &2027870420
 Animator:
   serializedVersion: 3
