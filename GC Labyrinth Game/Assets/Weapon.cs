@@ -6,6 +6,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] private new string name = "Default Weapon";
     [SerializeField] private GameObject attack = null;
 
+
+    [System.Serializable]
+    public enum weaponType
+    {
+        sword,
+        gun
+    };
+    public weaponType type;
+
     private SpriteRenderer sRenderer;
 
     public float Damage { get { return damage; } set { damage = value; } }
