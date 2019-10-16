@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Entity_Attack attack = null;
 
-    Vector2 movement;
-    Vector2 mousePos;
+    private Vector2 movement;
+    private Vector2 mousePos;
     
     void Update()
     {
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            attack.Attack();
+            attack.Attack(weapon.transform.position);
         }
     }
 

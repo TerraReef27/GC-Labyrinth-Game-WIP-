@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &377750256
 Transform:
   m_ObjectHideFlags: 0
@@ -210,12 +210,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 377750255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6966d4e9ae74c64cab966993bb60476, type: 3}
+  m_Script: {fileID: 11500000, guid: 502ae5a30f4553a4193f493595be5916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  attackDelay: 10
   name: Default Weapon
-  attack: {fileID: 2712676851294295516, guid: 478c3bf394e7db64cabd41ec5529b606, type: 3}
+  attribueSlots: 2
+  attributes:
+  - {fileID: 0}
+  - {fileID: 0}
+  attackAnimation: {fileID: 0}
+  hitboxX: 0.31
+  hitboxY: 1.45
+  attackOffset: {x: 0, y: 0, z: 0}
+  type: 0
 --- !u!1 &570933137
 GameObject:
   m_ObjectHideFlags: 0
@@ -31456,7 +31465,7 @@ GameObject:
   - component: {fileID: 1694453877}
   - component: {fileID: 1694453878}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31857,7 +31866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4b4a855fe3ef447b38df5d07badbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 377750258}
+  weapon: {fileID: 11400000, guid: e76083ab05b54de4cbb8006a223d4e6f, type: 2}
   attackCollector: {fileID: 1156571350}
 --- !u!50 &2027870418
 Rigidbody2D:
