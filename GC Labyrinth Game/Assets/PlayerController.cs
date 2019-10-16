@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movement;
     private Vector2 mousePos;
-    
+
+    public float angle;
+
     void Update()
     {
         /* VECTOR MOVEMENT
@@ -45,7 +47,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            attack.Attack(weapon.transform.position);
+            //Vector3 attackDirection = new Vector3(transform.position - mousePos);
+            //attack.Attack(weapon.transform.position);
+            attack.Attack(angle);
         }
     }
 
@@ -53,8 +57,8 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
 
-        Vector2 facing = mousePos - rb.position;
-        float angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;
+        Vector3 facing = mousePos - rb.position;
+        angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;
         weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Attack : MonoBehaviour
+public class Entity_Attack1 : MonoBehaviour
 {
-    [SerializeField] private Weapon weapon = null;
+    [SerializeField] private Weapon1 weapon = null;
     [SerializeField] private Transform parentWeapon = null;
 
     private Vector3 attackPos;
@@ -18,9 +18,9 @@ public class Entity_Attack : MonoBehaviour
     {
         //get data on weapon attack type
         //initaite the attack based off of previous data
-        Weapon.weaponType type = weapon.type;
+        Weapon1.weaponType type = weapon.type;
         
-        if(type == Weapon.weaponType.gun)
+        if(type == Weapon1.weaponType.gun)
         {
             //check ammo
             //shoot if there is ammo
@@ -28,7 +28,7 @@ public class Entity_Attack : MonoBehaviour
             //var attack = Instantiate(weapon.Attack);
             //attack.transform.parent = attackCollector.transform;
         }
-        else if (type == Weapon.weaponType.sword)
+        else if (type == Weapon1.weaponType.sword)
         {
             //sword swipe
             //lose durability
@@ -49,12 +49,5 @@ public class Entity_Attack : MonoBehaviour
     private void GetWeaponData()
     {
         //get the weapon data and assign it to local variables
-    }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPos, new Vector3(weapon.HitboxX, weapon.HitboxY));
     }
 }

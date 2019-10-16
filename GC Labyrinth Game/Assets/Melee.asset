@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Melee
   m_EditorClassIdentifier: 
   damage: 10
+  attackDelay: 10
   name: Default Weapon
-  attack: {fileID: 0}
+  attribueSlots: 0
+  attributes: []
+  attackAnimation: {fileID: 0}
+  hitboxX: 1
+  hitboxY: 1.5
   type: 0

@@ -23,8 +23,6 @@ public class Weapon1 : MonoBehaviour
     };
     public weaponType type;
 
-    private SpriteRenderer sRenderer;
-
     public float Damage { get { return damage; } private set { damage = value; } }
     public float AttackDelay { get { return attackDelay; } private set { attackDelay = value; } }
     public string Name { get { return name; } private set { name = value; } }
@@ -36,7 +34,7 @@ public class Weapon1 : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPos, new Vector3(hitboxX, hitboxY, 0));
+        Gizmos.DrawWireCube(transform.position, new Vector3(hitboxX, hitboxY, 0));
     }
 
     void Update()
