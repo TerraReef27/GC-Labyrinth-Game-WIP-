@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DamageHandler : MonoBehaviour
 {
-    [SerializeField] Enemy enemy = null;
+    [SerializeField] Entity entity = null;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Attack")
         {
-            enemy.TakeDamage(10);
+            entity.TakeDamage(10);
         }
     }
 }
