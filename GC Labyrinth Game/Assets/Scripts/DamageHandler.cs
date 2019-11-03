@@ -10,7 +10,11 @@ public class DamageHandler : MonoBehaviour
     {
         if(collision.gameObject.tag == "Attack")
         {
-            entity.TakeDamage(10);
+            entity.TakeDamage(collision.gameObject.GetComponent<Weapon>().Damage);
+        }
+        else if(collision.gameObject.tag == "Projectile")
+        {
+            entity.TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);
         }
     }
 }

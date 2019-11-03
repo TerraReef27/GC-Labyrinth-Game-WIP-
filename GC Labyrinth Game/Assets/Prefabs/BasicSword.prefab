@@ -96,12 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502ae5a30f4553a4193f493595be5916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  name: Default Weapon
+  damage: 25
+  name: Default Sword
   anim: {fileID: 876337739811737710}
   attackAnim: {fileID: 7400000, guid: 1b18b4eab0a7e4141a87df56ee6e7a37, type: 2}
   hitBox: {fileID: 876337739811737705}
   type: 0
+  projectile: {fileID: 0}
+  projectileSpeed: 50
 --- !u!61 &876337739811737705
 BoxCollider2D:
   m_ObjectHideFlags: 0

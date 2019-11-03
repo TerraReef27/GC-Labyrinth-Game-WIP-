@@ -27,9 +27,17 @@ public class Weapon : MonoBehaviour
     public string Name { get { return name; } private set { name = value; } }
     //public GameObject AttackAnimation { get { return attackAnimation; } private set { } }
 
-    [SerializeField] GameObject projectile;
+    [SerializeField] private GameObject projectile = null;
+    [SerializeField] private float projectileSpeed = 50f;
+
+    private GameObject projectileManager = null;
 
     #endregion
+
+    public void OnEnable()
+    {
+        projectileManager = GameObject.FindWithTag("ProjectileStorage");
+    }
 
     public void WeaponMeleeAttack()
     {
@@ -38,6 +46,13 @@ public class Weapon : MonoBehaviour
 
     public void WeaponRangedAttack()
     {
-        Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation);
+        //GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject newProjectile = Instantiate(projectile, projectileManager.transform);
+        newProjectile.transform.position = gameObject.transform.position;
+        newProjectile.transform.rotation = gameObject.transform.rotation;
+        newProjectile.GetComponent<Projectile>().damage = damage;
+        //newProjectile.transform.parent = bulletManager;
+
+        newProjectile.GetComponent<Projectile>().Shoot(gameObject.transform.up, projectileSpeed);
     }
 }
