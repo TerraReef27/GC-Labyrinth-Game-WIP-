@@ -5,13 +5,10 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [SerializeField] private float hp;
-
-    [SerializeField] public float MoveSpeed { get; set; }
-    public float Health { get { return hp; } set { hp = value; } }
-
-
-    //public float health = 100f;
     [SerializeField] private float moveSpeed;
+
+    public float MoveSpeed { get { return moveSpeed; } private set { moveSpeed = value; } }
+    public float Health { get { return hp; } set { hp = value; } }
 
     public void TakeDamage(float damage)
     {

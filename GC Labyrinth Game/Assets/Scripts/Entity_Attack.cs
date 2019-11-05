@@ -41,11 +41,6 @@ public class Entity_Attack : MonoBehaviour
         }
     }
 
-    private void GetWeaponData()
-    {
-        //get the weapon data and assign it to local variables
-    }
-
     public void SwitchWeapons()
     {
         if ((activeWeaponNum + 1) < weapons.Capacity)
