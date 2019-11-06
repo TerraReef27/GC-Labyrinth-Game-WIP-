@@ -6,7 +6,9 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb = null;
 
-    public float damage = 1f;
+    private float damage = 1f;
+
+    public float ProjectileDamage { get { return damage; } set { damage = value; } }
 
     void Start()
     {

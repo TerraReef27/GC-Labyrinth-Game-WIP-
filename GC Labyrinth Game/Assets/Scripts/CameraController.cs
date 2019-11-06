@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        transform.position = new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, distanceFromScene);
+        if(objectToFollow != null)
+            transform.position = new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, distanceFromScene);
     }
 }

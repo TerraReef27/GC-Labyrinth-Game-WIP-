@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 876337739811737704}
   - component: {fileID: 876337739811737705}
   - component: {fileID: 876337739811737710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicSword
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 876337739838180968}
   - component: {fileID: 876337739838180969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

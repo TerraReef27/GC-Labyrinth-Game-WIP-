@@ -31421,7 +31421,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 94630400}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1584514133}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 502ae5a30f4553a4193f493595be5916, type: 3}
@@ -31513,6 +31513,12 @@ Transform:
   m_Father: {fileID: 510181698}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1584514133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 876337739811737717, guid: 176610d7336db9c43a694ff81018bd0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 94630400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1694453876
 GameObject:
   m_ObjectHideFlags: 0
@@ -31732,7 +31738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  moveSpeed: 4.5
+  moveSpeed: 0
 --- !u!114 &1695975585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31745,7 +31751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a005839f65606964a8ab235767906f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistance: 2
+  stopDistance: 4
+  weapon: {fileID: 1584514133}
 --- !u!50 &1695975586
 Rigidbody2D:
   serializedVersion: 4
@@ -31894,6 +31901,8 @@ GameObject:
   - component: {fileID: 2027870418}
   - component: {fileID: 2027870420}
   - component: {fileID: 2027870421}
+  - component: {fileID: 2027870417}
+  - component: {fileID: 2027870423}
   - component: {fileID: 2027870419}
   - component: {fileID: 2027870422}
   m_Layer: 0
@@ -31960,7 +31969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027870414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9493623, y: -0.11219931, z: 0}
+  m_LocalPosition: {x: -2.32, y: -1.8, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 377750256}
@@ -31969,6 +31978,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2027870417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027870414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107d14c3b3303994c9d46e7152ba7af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10000
+  moveSpeed: 0
 --- !u!50 &2027870418
 Rigidbody2D:
   serializedVersion: 4
@@ -32072,6 +32095,19 @@ MonoBehaviour:
   - {fileID: 510181699}
   activeWeapon: {fileID: 0}
   activeWeaponNum: 0
+--- !u!114 &2027870423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027870414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28da0cc4ac28e954ab9eccf09a388c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 2027870417}
 --- !u!1001 &876337740037968538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32083,6 +32119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BasicSword
+      objectReference: {fileID: 0}
+    - target: {fileID: 876337739811737717, guid: 176610d7336db9c43a694ff81018bd0e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 876337739811737706, guid: 176610d7336db9c43a694ff81018bd0e,
         type: 3}

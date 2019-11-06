@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     private float angle;
     [SerializeField] private float stopDistance = 3f;
 
+    [SerializeField] GameObject weapon = null;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,24 +32,30 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        movement = target.transform.position - transform.position;
-        movement.Normalize();
+        if(target != null)
+        {
+            movement = target.transform.position - transform.position;
+            movement.Normalize();
+        }
     }
 
     void FixedUpdate()
     {
-        //Vector3 facing = mousePos - rb.position;
-        angle = Mathf.Atan2(target.transform.position.y, target.transform.position.x) * Mathf.Rad2Deg;
-        //weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+        if(target != null)
+        {
+            Vector2 targetDifference = target.transform.position - transform.position;
+            float sign = (target.transform.position.y < transform.position.y) ? -1f : 1f;
+            angle = Vector2.Angle(Vector2.right, targetDifference) * sign - 90f;
+            weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        if (Vector2.Distance(transform.position, target.transform.position) > stopDistance)
-        {
-            rb.MovePosition(rb.position + movement * entity.MoveSpeed * Time.fixedDeltaTime);
-        }
-        else if(attack != null)
-        {
-            //attack player
-            //attack.Attack();
+            if (Vector2.Distance(transform.position, target.transform.position) > stopDistance)     //change to state based programming
+            {
+                rb.MovePosition(rb.position + movement * entity.MoveSpeed * Time.fixedDeltaTime);
+            }
+            else if (attack != null)
+            {
+                attack.Attack();
+            }
         }
     }
 }

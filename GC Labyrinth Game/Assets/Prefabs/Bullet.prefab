@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 583975915748765947}
   - component: {fileID: 1805536143872827011}
   - component: {fileID: 9784379433416649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -143,4 +143,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 583975915748765947}
-  damage: 1

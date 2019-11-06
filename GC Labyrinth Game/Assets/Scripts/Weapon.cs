@@ -31,10 +31,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float projectileSpeed = 50f;
 
     private GameObject projectileManager = null;
-
     #endregion
-
-    public void OnEnable()
+    
+    void OnEnable()
     {
         projectileManager = GameObject.FindWithTag("ProjectileStorage");
     }
@@ -46,12 +45,10 @@ public class Weapon : MonoBehaviour
 
     public void WeaponRangedAttack()
     {
-        //GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation);
         GameObject newProjectile = Instantiate(projectile, projectileManager.transform);
         newProjectile.transform.position = gameObject.transform.position;
         newProjectile.transform.rotation = gameObject.transform.rotation;
-        newProjectile.GetComponent<Projectile>().damage = damage;
-        //newProjectile.transform.parent = bulletManager;
+        newProjectile.GetComponent<Projectile>().ProjectileDamage = damage;
 
         newProjectile.GetComponent<Projectile>().Shoot(gameObject.transform.up, projectileSpeed);
     }

@@ -14,7 +14,7 @@ public class DamageHandler : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Projectile")
         {
-            entity.TakeDamage(collision.gameObject.GetComponent<Projectile>().damage);
+            entity.TakeDamage(collision.gameObject.GetComponent<Projectile>().ProjectileDamage);
         }
     }
 }
