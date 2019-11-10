@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb = null;
 
     private float damage = 1f;
-
+    public bool isPlayerProjectile = false;
     public float ProjectileDamage { get { return damage; } set { damage = value; } }
 
     void Start()
@@ -28,9 +28,24 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Terrain")
+        if(isPlayerProjectile)
         {
-            Destroy(gameObject);
+            if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Terrain")
+            {
+                Destroy(gameObject);
+            }
         }
+        else
+        {
+            if (collision.gameObject.tag == "Terrain" || collision.gameObject.tag == "Player")
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public void SetIsPlayer(bool isPlayer)
+    {
+        isPlayerProjectile = isPlayer;
     }
 }

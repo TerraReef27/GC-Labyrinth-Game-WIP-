@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private AnimationClip attackAnim = null;
 
     public BoxCollider2D hitBox;
+    private bool isPlayerWeapon = false;
 
     [System.Serializable]
     public enum weaponType
@@ -32,7 +33,12 @@ public class Weapon : MonoBehaviour
 
     private GameObject projectileManager = null;
     #endregion
-    
+
+    void Start()
+    {
+        if (transform.parent.gameObject.tag == "Player")
+            isPlayerWeapon = true;
+    }
     void OnEnable()
     {
         projectileManager = GameObject.FindWithTag("ProjectileStorage");
@@ -50,6 +56,7 @@ public class Weapon : MonoBehaviour
         newProjectile.transform.rotation = gameObject.transform.rotation;
         newProjectile.GetComponent<Projectile>().ProjectileDamage = damage;
 
+        newProjectile.GetComponent<Projectile>().SetIsPlayer(isPlayerWeapon);
         newProjectile.GetComponent<Projectile>().Shoot(gameObject.transform.up, projectileSpeed);
     }
 }

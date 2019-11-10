@@ -6,10 +6,11 @@ public class EnemyAI : MonoBehaviour
 {
     private Entity entity = null;
     private Entity_Attack attack = null;
-    private GameObject target = null;
+    [Tooltip("What the AI goes towords or away from. Leave empty to target player")]
+    [SerializeField] private GameObject target = null;
     private Rigidbody2D rb = null;
 
-    private Vector2 movement;
+    private Vector2 movementDir;
     private float angle;
     [SerializeField] private float stopDistance = 3f;
 
@@ -26,7 +27,8 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        if(target == null)
+            ChagetTarget();
     }
 
 
@@ -34,8 +36,8 @@ public class EnemyAI : MonoBehaviour
     {
         if(target != null)
         {
-            movement = target.transform.position - transform.position;
-            movement.Normalize();
+            movementDir = target.transform.position - transform.position;
+            movementDir.Normalize();
         }
     }
 
@@ -46,16 +48,25 @@ public class EnemyAI : MonoBehaviour
             Vector2 targetDifference = target.transform.position - transform.position;
             float sign = (target.transform.position.y < transform.position.y) ? -1f : 1f;
             angle = Vector2.Angle(Vector2.right, targetDifference) * sign - 90f;
-            weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+            weapon.transform.rotation = Quaternion.Euler(0, 0, angle);  
 
             if (Vector2.Distance(transform.position, target.transform.position) > stopDistance)     //change to state based programming
             {
-                rb.MovePosition(rb.position + movement * entity.MoveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + movementDir * entity.MoveSpeed * Time.fixedDeltaTime);
             }
             else if (attack != null)
             {
                 attack.Attack();
             }
         }
+    }
+
+    private void ChangeTarget(GameObject newTarget)
+    {
+        target = newTarget;
+    }
+    private void ChagetTarget()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 }

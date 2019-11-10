@@ -10,7 +10,7 @@ public class Entity_Attack : MonoBehaviour
     [SerializeField] private int activeWeaponNum;
 
     private Vector3 attackPos;
-
+    //private bool isPlayerWeapon = false;
     public GameObject ActiveWeapon { get { return activeWeapon.gameObject; } private set { } }
 
     private void Start()
@@ -18,12 +18,13 @@ public class Entity_Attack : MonoBehaviour
         activeWeapon = weapons[0];
         activeWeaponNum = 0;
         activeWeapon.gameObject.SetActive(true);
+
+        //if(transform.parent.gameObject.tag == "Player")
+            //isPlayerWeapon = true;
     }
 
     public void Attack()
     {
-        //get data on weapon attack type
-        //initaite the attack based off of previous data
         Weapon.weaponType type = activeWeapon.type;
         
         if(type == Weapon.weaponType.ranged)
