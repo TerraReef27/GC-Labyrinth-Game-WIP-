@@ -31530,7 +31530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &630131047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31547,6 +31547,7 @@ MonoBehaviour:
   - {fileID: 723116604}
   activeWeapon: {fileID: 723116604}
   activeWeaponNum: 0
+  isPlayerWeapon: 0
 --- !u!114 &630131048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31894,7 +31895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1639211616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31911,6 +31912,7 @@ MonoBehaviour:
   - {fileID: 580595092}
   activeWeapon: {fileID: 580595092}
   activeWeaponNum: 0
+  isPlayerWeapon: 0
 --- !u!114 &1639211617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32057,7 +32059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639211615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.12, y: 3.89, z: 0}
+  m_LocalPosition: {x: -0.71, y: 3.89, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 580595094}
@@ -32166,7 +32168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1695975580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32336,6 +32338,7 @@ MonoBehaviour:
   - {fileID: 737358823}
   activeWeapon: {fileID: 737358823}
   activeWeaponNum: 0
+  isPlayerWeapon: 0
 --- !u!1 &1757653796
 GameObject:
   m_ObjectHideFlags: 0
@@ -32641,6 +32644,7 @@ MonoBehaviour:
   - {fileID: 510181699}
   activeWeapon: {fileID: 0}
   activeWeaponNum: 0
+  isPlayerWeapon: 0
 --- !u!114 &2027870423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32669,7 +32673,7 @@ PrefabInstance:
     - target: {fileID: 876337739811737717, guid: 176610d7336db9c43a694ff81018bd0e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 876337739811737706, guid: 176610d7336db9c43a694ff81018bd0e,
         type: 3}
@@ -32740,11 +32744,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicGun
       objectReference: {fileID: 0}
-    - target: {fileID: 3874142351948576434, guid: 18d08fa4adab1804e984d905255602c4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3874142351948576433, guid: 18d08fa4adab1804e984d905255602c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32799,21 +32798,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3874142351948576432, guid: 18d08fa4adab1804e984d905255602c4,
-        type: 3}
-      propertyPath: projectileSpeed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3874142351948576432, guid: 18d08fa4adab1804e984d905255602c4,
-        type: 3}
-      propertyPath: bulletManager
-      value: 
-      objectReference: {fileID: 86205397}
-    - target: {fileID: 3874142351948576432, guid: 18d08fa4adab1804e984d905255602c4,
-        type: 3}
-      propertyPath: projectileManager
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d08fa4adab1804e984d905255602c4, type: 3}

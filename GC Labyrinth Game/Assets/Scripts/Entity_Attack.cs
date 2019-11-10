@@ -10,8 +10,9 @@ public class Entity_Attack : MonoBehaviour
     [SerializeField] private int activeWeaponNum;
 
     private Vector3 attackPos;
-    //private bool isPlayerWeapon = false;
+    public bool isPlayerWeapon = false;
     public GameObject ActiveWeapon { get { return activeWeapon.gameObject; } private set { } }
+    //private IEnumerable freezeRotationCoroutine;
 
     private void Start()
     {
@@ -19,8 +20,8 @@ public class Entity_Attack : MonoBehaviour
         activeWeaponNum = 0;
         activeWeapon.gameObject.SetActive(true);
 
-        //if(transform.parent.gameObject.tag == "Player")
-            //isPlayerWeapon = true;
+        if(gameObject.tag == "Player")
+            isPlayerWeapon = true;
     }
 
     public void Attack()
@@ -38,6 +39,8 @@ public class Entity_Attack : MonoBehaviour
         }
         else if (type == Weapon.weaponType.melee)
         {
+            //StartCoroutine("FreezeRotation", activeWeapon.GetComponent<Weapon>().attackAnim.length);  
+            //StartCoroutine(freezeRotationCoroutine);
             activeWeapon.WeaponMeleeAttack();
         }
     }
@@ -61,7 +64,15 @@ public class Entity_Attack : MonoBehaviour
             activeWeapon.gameObject.SetActive(false);
             activeWeapon = weapons[weaponToSwitchTo];
             activeWeaponNum = weaponToSwitchTo;
+            
             activeWeapon.gameObject.SetActive(true);
         }
+    }
+
+    IEnumerable FreezeRotation(float time)
+    {
+        Debug.Log("Started Corotine");
+        activeWeapon.transform.rotation = activeWeapon.transform.rotation;
+        yield return new WaitForSeconds(time);
     }
 }

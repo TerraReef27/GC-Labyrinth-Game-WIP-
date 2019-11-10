@@ -28,7 +28,7 @@ public class DamageHandler : MonoBehaviour
         }
         else
         {
-            if (collision.gameObject.tag == "Attack")
+            if (collision.gameObject.tag == "Attack" && collision.gameObject.GetComponentInParent<Entity_Attack>().isPlayerWeapon == true)
             {
                 entity.TakeDamage(collision.gameObject.GetComponent<Weapon>().Damage);
             }

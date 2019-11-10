@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &876337739811737706
 Transform:
   m_ObjectHideFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   anim: {fileID: 876337739811737710}
   attackAnim: {fileID: 7400000, guid: 1b18b4eab0a7e4141a87df56ee6e7a37, type: 2}
   hitBox: {fileID: 876337739811737705}
+  attackVFX: {fileID: 876337739838180971}
   type: 0
   projectile: {fileID: 0}
   projectileSpeed: 50

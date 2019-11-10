@@ -32,8 +32,7 @@ public class Projectile : MonoBehaviour
         {
             if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Terrain")
             {
-                Destroy(gameObject);
-            }
+                Destroy(gameObject);            }
         }
         else
         {

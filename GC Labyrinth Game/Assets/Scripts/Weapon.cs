@@ -26,7 +26,7 @@ public class Weapon : MonoBehaviour
 
     public float Damage { get { return damage; } private set { damage = value; } }
     public string Name { get { return name; } private set { name = value; } }
-    //public GameObject AttackAnimation { get { return attackAnimation; } private set { } }
+    public AnimationClip AttackAnimation { get { return attackAnim; } private set { attackAnim = value; } }
 
     [SerializeField] private GameObject projectile = null;
     [SerializeField] private float projectileSpeed = 50f;
