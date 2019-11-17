@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private Entity_Attack attack = null;
-
+    [SerializeField] private Entity entity = null;
+    
     private Vector2 movement;
     private Vector2 mousePos;
 
@@ -45,7 +47,14 @@ public class PlayerController : MonoBehaviour
         {
             attack.Attack();
         }
-
+        if(Input.GetButtonDown("Fire2"))
+        {
+           entity.Dodge((mousePos - new Vector2(transform.position.x, transform.position.y)).normalized);
+        }
+        if (Input.GetButtonDown("Block"))
+        {
+            StartCoroutine(entity.Block());
+        }
         GetWeaponSwitchInputs();
     }
 
@@ -81,5 +90,5 @@ public class PlayerController : MonoBehaviour
             weapon = attack.ActiveWeapon;
 
         }
-    }  
+    }
 }

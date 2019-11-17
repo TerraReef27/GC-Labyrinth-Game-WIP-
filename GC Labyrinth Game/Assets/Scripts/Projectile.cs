@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb = null;
 
     private float damage = 1f;
+    private float projectileKnockback = 10f;
     public bool isPlayerProjectile = false;
     public float ProjectileDamage { get { return damage; } set { damage = value; } }
+    public float ProjectileKnockback { get { return projectileKnockback; } set { projectileKnockback = value; } }
 
     void Start()
     {
@@ -31,15 +33,12 @@ public class Projectile : MonoBehaviour
         if(isPlayerProjectile)
         {
             if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Terrain")
-            {
-                Destroy(gameObject);            }
+                Destroy(gameObject);
         }
         else
         {
             if (collision.gameObject.tag == "Terrain" || collision.gameObject.tag == "Player")
-            {
                 Destroy(gameObject);
-            }
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
@@ -30,33 +31,76 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private GameObject projectile = null;
     [SerializeField] private float projectileSpeed = 50f;
+    [SerializeField] private int ammoCount = 10;
+    [SerializeField] private float reloadDelay = 1f;
+    private int currentAmmo = 10;
 
     private GameObject projectileManager = null;
+
+    private bool isCoolingDown = false;
+    [Tooltip("Time till next attack can be used")]
+    [SerializeField] private float cooldown = .2f;
+
+    [SerializeField] private float hitstun = .2f;
+    [SerializeField] private float knockback = 1f;
+    public float Knockback { get { return knockback; } private set { knockback = value; } }
+    public float Hitstun { get { return hitstun; } private set { hitstun = value; } }
     #endregion
 
     void Start()
     {
+        currentAmmo = ammoCount;
         if (transform.parent.gameObject.tag == "Player")
             isPlayerWeapon = true;
     }
     void OnEnable()
     {
         projectileManager = GameObject.FindWithTag("ProjectileStorage");
+        isCoolingDown = false;
     }
 
     public void WeaponMeleeAttack()
     {
-        anim.Play(attackAnim.name);
+        if (!isCoolingDown)
+        {
+            StartCoroutine(Cooldown());
+            anim.Play(attackAnim.name);
+        }
     }
 
     public void WeaponRangedAttack()
     {
-        GameObject newProjectile = Instantiate(projectile, projectileManager.transform);
-        newProjectile.transform.position = gameObject.transform.position;
-        newProjectile.transform.rotation = gameObject.transform.rotation;
-        newProjectile.GetComponent<Projectile>().ProjectileDamage = damage;
+        if(currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+        }
+        else if(!isCoolingDown)
+        {
+            StartCoroutine(Cooldown());
 
-        newProjectile.GetComponent<Projectile>().SetIsPlayer(isPlayerWeapon);
-        newProjectile.GetComponent<Projectile>().Shoot(gameObject.transform.up, projectileSpeed);
+            GameObject newProjectile = Instantiate(projectile, projectileManager.transform);
+            newProjectile.transform.position = gameObject.transform.position;
+            newProjectile.transform.rotation = gameObject.transform.rotation;
+            newProjectile.GetComponent<Projectile>().ProjectileDamage = damage;
+            newProjectile.GetComponent<Projectile>().ProjectileKnockback = knockback;
+
+            newProjectile.GetComponent<Projectile>().SetIsPlayer(isPlayerWeapon);
+            newProjectile.GetComponent<Projectile>().Shoot(gameObject.transform.up, projectileSpeed);
+
+            currentAmmo--;
+        }
+    }
+
+    private IEnumerator Cooldown()
+    {
+        isCoolingDown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCoolingDown = false;
+    }
+
+    private IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadDelay);
+        currentAmmo = ammoCount;
     }
 }

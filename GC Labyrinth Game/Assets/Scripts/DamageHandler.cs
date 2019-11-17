@@ -6,6 +6,7 @@ public class DamageHandler : MonoBehaviour
 {
     [SerializeField] Entity entity = null;
     private bool isPlayer = false;
+    
 
     private void Start()
     {
@@ -15,27 +16,41 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isPlayer)
+        if (entity.currentState != Entity.EntityState.Blocking || entity.currentState != Entity.EntityState.Dodging)
         {
-            if (collision.gameObject.tag == "Attack")
+            if (isPlayer)
             {
-                entity.TakeDamage(collision.gameObject.GetComponent<Weapon>().Damage);
+                if (collision.gameObject.tag == "Attack")
+                {
+                    PhysicalDamage(collision.gameObject);
+                }
+                else if (collision.gameObject.tag == "Projectile" && collision.gameObject.GetComponent<Projectile>().isPlayerProjectile == false)
+                {
+                    ProjectileDamage(collision.gameObject);
+                }
             }
-            else if (collision.gameObject.tag == "Projectile" && collision.gameObject.GetComponent<Projectile>().isPlayerProjectile == false)
+            else
             {
-                entity.TakeDamage(collision.gameObject.GetComponent<Projectile>().ProjectileDamage);
+                if (collision.gameObject.tag == "Attack" && collision.gameObject.GetComponentInParent<Entity_Attack>().isPlayerWeapon == true)
+                {
+                    PhysicalDamage(collision.gameObject);
+                }
+                else if (collision.gameObject.tag == "Projectile" && collision.gameObject.GetComponent<Projectile>().isPlayerProjectile == true)
+                {
+                    ProjectileDamage(collision.gameObject);
+                }
             }
         }
-        else
-        {
-            if (collision.gameObject.tag == "Attack" && collision.gameObject.GetComponentInParent<Entity_Attack>().isPlayerWeapon == true)
-            {
-                entity.TakeDamage(collision.gameObject.GetComponent<Weapon>().Damage);
-            }
-            else if (collision.gameObject.tag == "Projectile" && collision.gameObject.GetComponent<Projectile>().isPlayerProjectile == true)
-            {
-                entity.TakeDamage(collision.gameObject.GetComponent<Projectile>().ProjectileDamage);
-            }
-        }
+    }
+
+    private void ProjectileDamage(GameObject collisionObject)
+    {
+        entity.TakeDamage(collisionObject.GetComponent<Projectile>().ProjectileDamage);
+        StartCoroutine(entity.ApplyKnockback(transform.position - collisionObject.transform.position, collisionObject.GetComponent<Projectile>().ProjectileKnockback));
+    }
+    private void PhysicalDamage(GameObject collisionObject)
+    {
+        entity.TakeDamage(collisionObject.GetComponent<Weapon>().Damage);
+        StartCoroutine(entity.ApplyKnockback(transform.position - collisionObject.transform.position, collisionObject.GetComponent<Weapon>().Knockback));
     }
 }
