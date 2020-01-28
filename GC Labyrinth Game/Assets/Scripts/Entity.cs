@@ -58,6 +58,7 @@ public class Entity : MonoBehaviour
     public void Dodge(Vector3 inputPoint)
     {
         //TODO play dodge animation
+        //Maybe add raycast to check colliders
         StartCoroutine(MoveDodge(inputPoint));
         StartCoroutine(Block(dodgeTime));
     }

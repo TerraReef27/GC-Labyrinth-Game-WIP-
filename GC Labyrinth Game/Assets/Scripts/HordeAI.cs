@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class HordeAI : MonoBehaviour
 {
     private Entity entity = null;
     private Entity_Attack attack = null;
@@ -17,25 +17,31 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("The weapon the AI uses")]
     [SerializeField] GameObject weapon = null;
 
+    enum AIState { Attacking, Neutral, Following };
+    private AIState currentState = AIState.Neutral;
+
+    private List<HordeAI> horde;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         entity = GetComponent<Entity>();
 
-        if(GetComponent<Entity_Attack>() != null)
+        if (GetComponent<Entity_Attack>() != null)
             attack = GetComponent<Entity_Attack>();
     }
 
     void Start()
     {
-        if(target == null)
+        currentState = AIState.Neutral;
+        if (target == null)
             ChangeTarget();
     }
 
 
     void Update()
     {
-        if(target != null)
+        if (target != null)
         {
             movementDir = target.transform.position - transform.position;
             movementDir.Normalize();
@@ -65,6 +71,11 @@ public class EnemyAI : MonoBehaviour
                 attack.Attack();
             }
         }
+    }
+
+    private void Assimilate()
+    {
+
     }
 
     private void ChangeTarget(GameObject newTarget)

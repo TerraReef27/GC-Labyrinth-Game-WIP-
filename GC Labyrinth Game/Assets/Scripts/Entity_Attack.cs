@@ -30,11 +30,6 @@ public class Entity_Attack : MonoBehaviour
         
         if(type == Weapon.weaponType.ranged)
         {
-            //check ammo
-            //shoot if there is ammo
-            //reload ammo if 0 left
-            //var attack = Instantiate(weapon.Attack);
-            //attack.transform.parent = attackCollector.transform;
             activeWeapon.WeaponRangedAttack();
         }
         else if (type == Weapon.weaponType.melee)
