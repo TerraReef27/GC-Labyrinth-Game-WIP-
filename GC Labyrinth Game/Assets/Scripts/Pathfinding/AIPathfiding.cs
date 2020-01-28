@@ -14,15 +14,14 @@ public class AIPathfiding
     public AIPathfiding(int x, int y, Vector3 origin)
     {
         grid = new PathGrid<PathfindingNode>(x, y, 1f, origin);
-        /*
         for (int i = 0; i < grid.GetGridWidth(); i++)
         {
             for (int j = 0; j < grid.GetGridHeight(); j++)
             {
-                GetNode(i, j).SetXY(i, j);
+                PathfindingNode newNode = new PathfindingNode(grid, i, j);
+                grid.SetGridObject(i, j, newNode);
             }
         }
-        */
     }
 
     public List<PathfindingNode> FindTarget(Vector2 startPos, Vector2 endPos)
@@ -37,9 +36,7 @@ public class AIPathfiding
         {
             for(int j = 0; j < grid.GetGridHeight(); j++)
             {
-                Debug.Log(i + " " + j);
                 PathfindingNode node = grid.GetGridObject(i, j);
-                Debug.Log("Node is: " + node);
                 node.gCost = int.MaxValue;
                 node.CalculateFCost();
                 node.parentNode = null;
@@ -65,15 +62,14 @@ public class AIPathfiding
             {
                 if (closedNodes.Contains(neighbor))
                     continue;
-
-                int newHCost = GetDistanceValue(currentNode, neighbor);
-                int newGCost = currentNode.gCost + newHCost;
+                
+                int newGCost = currentNode.gCost + GetDistanceValue(currentNode, neighbor);
                 
                 if(newGCost < neighbor.gCost)
                 {
                     neighbor.parentNode = currentNode;
                     neighbor.gCost = newGCost;
-                    neighbor.hCost = newHCost;
+                    neighbor.hCost = GetDistanceValue(currentNode, endNode);
                     neighbor.CalculateFCost();
                 }
 
@@ -144,10 +140,10 @@ public class AIPathfiding
 
     private int GetDistanceValue(PathfindingNode start, PathfindingNode goal)
     {
-        int horizontalDisance = Mathf.Abs(start.GetX() - goal.GetY());
+        int horizontalDisance = Mathf.Abs(start.GetX() - goal.GetX());
         int verticalDisance = Mathf.Abs(start.GetY() - goal.GetY());
         int remaining = Mathf.Abs(horizontalDisance - verticalDisance);
-        return HorizontalMovePrice * Mathf.Min(horizontalDisance, verticalDisance) + DiagonalMovePrice * remaining;
+        return DiagonalMovePrice * Mathf.Min(horizontalDisance, verticalDisance) + HorizontalMovePrice * remaining;
     }
 
     public PathGrid<PathfindingNode> GetGrid()

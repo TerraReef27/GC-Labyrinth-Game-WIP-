@@ -25,7 +25,7 @@ public class GridTest : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             //grid.SetGridObject(mousePos, 100);
-            grid.GetGridObject(mousePos).SetXY(0, 0);
+            //grid.GetGridObject(mousePos).SetXY(0, 0);
             Debug.Log(grid.GetGridObject(mousePos).GetX());
             Debug.Log(grid.GetGridObject(mousePos).GetY());
         }

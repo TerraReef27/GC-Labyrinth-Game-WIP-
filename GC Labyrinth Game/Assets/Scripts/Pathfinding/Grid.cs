@@ -72,12 +72,10 @@ public class PathGrid<T>
     {
         if ((x >= 0 && y >= 0) && (x < width && y < height))
         {
-            Debug.Log("Returning obejct");
             return gridArray[x, y];
         }
         else
         {
-            Debug.Log("Not a real object");
             return default;
         }
 
