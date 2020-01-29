@@ -1,21 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class PathfindingTest : MonoBehaviour
+public class PathfindingGrid : MonoBehaviour
 {
     private AIPathfiding pathfinding;
 
-    private Vector2 mousePos;
-    private Vector2 searchStart = new Vector2(0, 0);
-
+    [SerializeField] int x, y;
+    [SerializeField] Vector3 origin;
     
-
+    private Vector2 mousePos;
     [SerializeField] private GameObject source;
+
+    [SerializeField] Tilemap collisions;
 
     void Start()
     {
-        pathfinding = new AIPathfiding(20, 20, Vector3.zero);
+        pathfinding = new AIPathfiding(x, y, origin);
+
+        foreach(var pos in collisions.cellBounds.allPositionsWithin)
+        {
+            Vector3Int localArea = new Vector3Int(pos.x, pos.y, pos.z);
+            if(collisions.HasTile(localArea))
+            {
+                pathfinding.GetGrid().GetGridObject(pos).isWalkable = false;
+                Debug.Log(pathfinding.GetGrid().GetGridObject(pos));
+                Debug.Log("Set to non walkable");
+            }
+        }
     }
     
     void Update()
@@ -34,9 +47,5 @@ public class PathfindingTest : MonoBehaviour
             
         }
     }
-
-    private void GoToTarget(Vector3 target)
-    {
-
-    }
+    
 }

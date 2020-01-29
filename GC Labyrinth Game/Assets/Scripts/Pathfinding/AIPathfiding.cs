@@ -86,7 +86,22 @@ public class AIPathfiding
             {
                 if (closedNodes.Contains(neighbor))
                     continue;
-                
+
+                if(!neighbor.isWalkable)
+                {
+                    closedNodes.Add(neighbor);
+                    /*
+                    for(int i = -2; i < 3; i++)
+                    {
+                        for(int j = -2; j < 3; j++)
+                        {
+                            closedNodes.Add(grid.GetGridObject(neighbor.GetX() + i, neighbor.GetY() + j));
+                        }
+                    }
+                    */
+                    continue;
+                }
+
                 int newGCost = currentNode.gCost + GetDistanceValue(currentNode, neighbor);
                 
                 if(newGCost < neighbor.gCost)

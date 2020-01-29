@@ -14,11 +14,14 @@ public class PathfindingNode
 
     public PathfindingNode parentNode;
 
+    public bool isWalkable;
+
     public PathfindingNode(PathGrid<PathfindingNode> _grid, int _x, int _y)
     {
         grid = _grid;
         x = _x;
         y = _y;
+        isWalkable = true;
     }
 
     public void CalculateFCost()
@@ -28,7 +31,7 @@ public class PathfindingNode
 
     public override string ToString()
     {
-        return "Node is X: " + x + " " + "Y: " + y;
+        return "Node is X: " + x + " " + "Y: " + y + "\nNode walkability is:" + isWalkable;
     }
 
     public int GetX()
