@@ -25,8 +25,6 @@ public class PathfindingGrid : MonoBehaviour
             if(collisions.HasTile(localArea))
             {
                 pathfinding.GetGrid().GetGridObject(pos).isWalkable = false;
-                Debug.Log(pathfinding.GetGrid().GetGridObject(pos));
-                Debug.Log("Set to non walkable");
             }
         }
     }

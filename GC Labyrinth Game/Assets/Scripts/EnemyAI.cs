@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     private List<Vector3> path;
     private int currentPathIndex;
 
+    private List<PathfindingNode> underPath;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,8 +45,8 @@ public class EnemyAI : MonoBehaviour
         if(target != null)
         {
 
-            movementDir = target.transform.position - transform.position;
-            movementDir.Normalize();
+            //movementDir = target.transform.position - transform.position;
+            //movementDir.Normalize();
         }
     }
 
@@ -79,6 +81,15 @@ public class EnemyAI : MonoBehaviour
     {
         path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
         FollowPath(path);
+
+        underPath = AIPathfiding.instance.FindTarget(gameObject.transform.position, target.transform.position);
+        if (path != null)
+        {
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                Debug.DrawLine(new Vector3(underPath[i].GetX(), underPath[i].GetY()) + Vector3.one, new Vector3(underPath[i + 1].GetX(), underPath[i + 1].GetY()) + Vector3.one, Color.cyan);
+            }
+        }
     }
 
     private void FollowPath(List<Vector3> path)
@@ -88,8 +99,9 @@ public class EnemyAI : MonoBehaviour
             Vector3 moveTo = path[currentPathIndex];
             if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
             {
-                Vector3 moveDir = (moveTo - transform.position).normalized;
-                rb.MovePosition(rb.position + movementDir * entity.MoveSpeed * Time.fixedDeltaTime);
+                Debug.Log("Moving");
+                Vector2 moveDir = (moveTo - transform.position).normalized;
+                rb.MovePosition(rb.position + moveDir * entity.MoveSpeed * Time.fixedDeltaTime);
             }
             else
             {
