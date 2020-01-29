@@ -29,7 +29,6 @@ public class PathGrid<T>
         Debug.DrawLine(GetWorldPos(0, height), GetWorldPos(width, height), Color.green, 1000f);
         Debug.DrawLine(GetWorldPos(width, 0), GetWorldPos(width, height), Color.green, 1000f);
     }
-    //I am not well. 
 
     private Vector3 GetWorldPos(int x, int y)
     {
@@ -41,7 +40,7 @@ public class PathGrid<T>
         Vector2Int gridPos = new Vector2Int();
         gridPos.x = Mathf.FloorToInt((worldPos.x - origin.x) / cellSize);
         gridPos.y = Mathf.FloorToInt((worldPos.y - origin.y) / cellSize);
-
+        
         return gridPos;
     }
     public void GetGridPos(Vector3 worldPos, out int x, out int y)
@@ -94,5 +93,10 @@ public class PathGrid<T>
     public int GetGridHeight()
     {
         return height;
+    }
+
+    public float GetCellSize()
+    {
+        return cellSize;
     }
 }

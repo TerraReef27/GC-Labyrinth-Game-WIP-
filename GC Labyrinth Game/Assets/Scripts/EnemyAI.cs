@@ -17,6 +17,9 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("The weapon the AI uses")]
     [SerializeField] GameObject weapon = null;
 
+    private List<Vector3> path;
+    private int currentPathIndex;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +31,8 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        currentPathIndex = 0;
+
         if(target == null)
             ChangeTarget();
     }
@@ -37,6 +42,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(target != null)
         {
+
             movementDir = target.transform.position - transform.position;
             movementDir.Normalize();
         }
@@ -55,7 +61,7 @@ public class EnemyAI : MonoBehaviour
             float sign = (target.transform.position.y < transform.position.y) ? -1f : 1f;
             angle = Vector2.Angle(Vector2.right, targetDifference) * sign - 90f;
             weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-
+            /*
             if (Vector2.Distance(transform.position, target.transform.position) > stopDistance)     //change to state based programming
             {
                 rb.MovePosition(rb.position + movementDir * entity.MoveSpeed * Time.fixedDeltaTime);
@@ -64,9 +70,43 @@ public class EnemyAI : MonoBehaviour
             {
                 attack.Attack();
             }
+            */
         }
+        FindTarget();
     }
 
+    private void FindTarget()
+    {
+        path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
+        FollowPath(path);
+    }
+
+    private void FollowPath(List<Vector3> path)
+    {
+        if(path != null)
+        {
+            Vector3 moveTo = path[currentPathIndex];
+            if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
+            {
+                Vector3 moveDir = (moveTo - transform.position).normalized;
+                rb.MovePosition(rb.position + movementDir * entity.MoveSpeed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                currentPathIndex++;
+                if(currentPathIndex >= path.Count)
+                {
+                    attack.Attack();
+                }
+            }
+        }
+        else
+        {
+            path = null;
+            attack.Attack();
+        }
+    }
+    
     private void ChangeTarget(GameObject newTarget)
     {
         target = newTarget;

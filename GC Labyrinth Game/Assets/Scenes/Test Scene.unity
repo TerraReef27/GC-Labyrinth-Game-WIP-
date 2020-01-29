@@ -32918,7 +32918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1695975580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33052,7 +33052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  stopDistance: 3.5
+  stopDistance: 1.5
   weapon: {fileID: 1584514133}
 --- !u!50 &1695975586
 Rigidbody2D:
@@ -33392,7 +33392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027870414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.12, y: 0.74, z: 0}
+  m_LocalPosition: {x: -9.9, y: 5.45, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 377750256}

@@ -11,8 +11,11 @@ public class AIPathfiding
     private List<PathfindingNode> openNodes;
     private List<PathfindingNode> closedNodes;
 
+    public static AIPathfiding instance { get; private set; }
+
     public AIPathfiding(int x, int y, Vector3 origin)
     {
+        instance = this;
         grid = new PathGrid<PathfindingNode>(x, y, 1f, origin);
         for (int i = 0; i < grid.GetGridWidth(); i++)
         {
@@ -24,8 +27,29 @@ public class AIPathfiding
         }
     }
 
+    public List<Vector3> FindPath(Vector3 startPos, Vector3 endPos)
+    {
+        List<PathfindingNode> path = FindTarget(startPos, endPos);
+        if (path == null)
+            return null;
+        else
+        {
+            List<Vector3> worldPath = new List<Vector3>();
+            foreach(PathfindingNode node in path)
+            {
+                worldPath.Add(new Vector3(node.GetX(), node.GetY()) * grid.GetCellSize() + Vector3.one * grid.GetCellSize());
+            }
+            return worldPath;
+        }
+
+    }
+
     public List<PathfindingNode> FindTarget(Vector2 startPos, Vector2 endPos)
     {
+        if(grid.GetGridObject(endPos) == null)
+        {
+            return null;
+        }
         PathfindingNode startNode = grid.GetGridObject(startPos);
         PathfindingNode endNode = grid.GetGridObject(endPos);
 
