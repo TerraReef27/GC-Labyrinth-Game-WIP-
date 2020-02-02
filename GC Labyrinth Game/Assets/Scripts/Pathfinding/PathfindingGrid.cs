@@ -7,24 +7,28 @@ public class PathfindingGrid : MonoBehaviour
 {
     private AIPathfiding pathfinding;
 
-    [SerializeField] int x, y;
-    [SerializeField] Vector3 origin;
+    [SerializeField] int x = 0, y = 0;
+    [SerializeField] Vector3 origin = Vector3.zero;
     
     private Vector2 mousePos;
-    [SerializeField] private GameObject source;
+    [SerializeField] private GameObject source = null;
 
-    [SerializeField] Tilemap collisions;
+    [SerializeField] Tilemap collisions = null;
 
     void Start()
     {
         pathfinding = new AIPathfiding(x, y, origin);
 
-        foreach(var pos in collisions.cellBounds.allPositionsWithin)
+        if(collisions != null)
         {
-            Vector3Int localArea = new Vector3Int(pos.x, pos.y, pos.z);
-            if(collisions.HasTile(localArea))
+            foreach (var pos in collisions.cellBounds.allPositionsWithin)
             {
-                pathfinding.GetGrid().GetGridObject(pos).isWalkable = false;
+                Vector3Int localArea = new Vector3Int(pos.x, pos.y, pos.z);
+                if (collisions.HasTile(localArea))
+                {
+                    Debug.Log("Tile is now unwalkable");
+                    pathfinding.GetGrid().GetGridObject(pos).isWalkable = false;
+                }
             }
         }
     }

@@ -59,7 +59,7 @@ public class Entity : MonoBehaviour
     {
         //TODO play dodge animation
         //Maybe add raycast to check colliders
-        StartCoroutine(MoveDodge(inputPoint));
+        StartCoroutine(MoveDodge(inputPoint.normalized));
         StartCoroutine(Block(dodgeTime));
     }
     private IEnumerator MoveDodge(Vector3 dodgeDirection)
@@ -69,7 +69,10 @@ public class Entity : MonoBehaviour
         
         while(currentDodgeTime >= 1)
         {
-            transform.position += dodgeDirection * currentDodgeTime * Time.deltaTime;
+            if(dodgeDirection != Vector3.zero)
+                transform.position += dodgeDirection * currentDodgeTime * Time.deltaTime;
+            else
+                transform.position += Vector3.down * currentDodgeTime * Time.deltaTime;
             currentDodgeTime -= 1;
             yield return new WaitForEndOfFrame();
         }

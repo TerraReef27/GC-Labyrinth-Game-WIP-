@@ -8,7 +8,6 @@ public class EnemyAI : MonoBehaviour
     private Entity_Attack attack = null;
     [Tooltip("What the AI goes towords or away from. Leave empty to target player")]
     [SerializeField] private GameObject target = null;
-    private Rigidbody2D rb = null;
 
     private Vector2 movementDir;
     private float angle;
@@ -24,7 +23,6 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         entity = GetComponent<Entity>();
 
         if(GetComponent<Entity_Attack>() != null)
@@ -79,15 +77,18 @@ public class EnemyAI : MonoBehaviour
 
     private void FindTarget()
     {
-        path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
-        FollowPath(path);
-
-        underPath = AIPathfiding.instance.FindTarget(gameObject.transform.position, target.transform.position);
-        if (path != null)
+        if(target != null)
         {
-            for (int i = 0; i < path.Count - 1; i++)
+            path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
+            FollowPath(path);
+
+            underPath = AIPathfiding.instance.FindTarget(gameObject.transform.position, target.transform.position);
+            if (path != null)
             {
-                Debug.DrawLine(new Vector3(underPath[i].GetX(), underPath[i].GetY()) + Vector3.one, new Vector3(underPath[i + 1].GetX(), underPath[i + 1].GetY()) + Vector3.one, Color.cyan);
+                for (int i = 0; i < path.Count - 1; i++)
+                {
+                    //Debug.DrawLine(new Vector3(underPath[i].GetX(), underPath[i].GetY()) + Vector3.one, new Vector3(underPath[i + 1].GetX(), underPath[i + 1].GetY()) + Vector3.one, Color.cyan);
+                }
             }
         }
     }
@@ -99,9 +100,8 @@ public class EnemyAI : MonoBehaviour
             Vector3 moveTo = path[currentPathIndex];
             if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
             {
-                Debug.Log("Moving");
                 Vector2 moveDir = (moveTo - transform.position).normalized;
-                rb.MovePosition(rb.position + moveDir * entity.MoveSpeed * Time.fixedDeltaTime);
+                transform.position += Vector3.ClampMagnitude(moveDir, entity.MoveSpeed) * entity.MoveSpeed * Time.deltaTime;
             }
             else
             {

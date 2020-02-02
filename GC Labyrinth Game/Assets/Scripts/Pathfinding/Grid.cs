@@ -18,6 +18,7 @@ public class PathGrid<T>
 
         gridArray = new T[width, height];
 
+        /*
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
@@ -28,6 +29,7 @@ public class PathGrid<T>
         }
         Debug.DrawLine(GetWorldPos(0, height), GetWorldPos(width, height), Color.green, 1000f);
         Debug.DrawLine(GetWorldPos(width, 0), GetWorldPos(width, height), Color.green, 1000f);
+        */
     }
 
     private Vector3 GetWorldPos(int x, int y)
