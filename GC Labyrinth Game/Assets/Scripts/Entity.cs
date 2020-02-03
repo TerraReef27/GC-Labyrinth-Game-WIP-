@@ -8,7 +8,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private float hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float blockTime = .5f;
-    [SerializeField] private float dodgeTime = 10f;
+    [SerializeField] private int dodgeFrames = 10;
+
+    [SerializeField] private float dodgeForce = 25000f;
+
+    private Rigidbody2D rb = null;
 
     private DamageHandler dh = null;
 
@@ -23,6 +27,7 @@ public class Entity : MonoBehaviour
     void Awake()
     {
         dh = GetComponent<DamageHandler>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -55,17 +60,39 @@ public class Entity : MonoBehaviour
     }
 
 
-    public void Dodge(Vector3 inputPoint)
+    public void Dodge(Vector2 inputPoint)
     {
         //TODO play dodge animation
         //Maybe add raycast to check colliders
-        StartCoroutine(MoveDodge(inputPoint.normalized));
-        StartCoroutine(Block(dodgeTime));
+        //StartCoroutine(MoveDodge(inputPoint.normalized));
+        if(currentState == EntityState.Neutral)
+            StartCoroutine(NewDodge(inputPoint.normalized));
+        //StartCoroutine(Block(dodgeTime));
+    }
+    private IEnumerator NewDodge(Vector2 direction)
+    {
+        currentState = EntityState.Dodging;
+
+        float currentDodgeTime = dodgeFrames;
+        float moveDistance = dodgeForce / dodgeFrames;
+
+        while(currentDodgeTime >= 1)
+        {
+            if (direction != Vector2.zero)
+                rb.AddForce(direction * moveDistance * Time.fixedDeltaTime);
+                //rb.MovePosition(rb.position + direction * dodgeForce * Time.fixedDeltaTime);
+            else
+                rb.AddForce(Vector2.down * moveDistance * Time.fixedDeltaTime);
+                //rb.MovePosition(rb.position + Vctor2.down * dodgeForce * Time.fixedDeltaTime);
+            currentDodgeTime--;
+            yield return new WaitForEndOfFrame();
+        }
+        currentState = EntityState.Neutral;
     }
     private IEnumerator MoveDodge(Vector3 dodgeDirection)
     {
         currentState = EntityState.Dodging;
-        float currentDodgeTime = dodgeTime;
+        float currentDodgeTime = dodgeFrames;
         
         while(currentDodgeTime >= 1)
         {

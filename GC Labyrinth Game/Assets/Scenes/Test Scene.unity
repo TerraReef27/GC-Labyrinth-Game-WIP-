@@ -221,6 +221,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   blockTime: 0.5
   dodgeTime: 0.5
+  dodgeDistance: 0
   currentState: 0
 --- !u!114 &146411378
 MonoBehaviour:
@@ -33039,6 +33040,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   blockTime: 0.5
   dodgeTime: 0.5
+  dodgeDistance: 0
   currentState: 0
 --- !u!114 &630131050
 MonoBehaviour:
@@ -33385,6 +33387,7 @@ MonoBehaviour:
   moveSpeed: 4.5
   blockTime: 0.5
   dodgeTime: 0.5
+  dodgeDistance: 0
   currentState: 0
 --- !u!114 &1639211619
 MonoBehaviour:
@@ -33772,8 +33775,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2027870416}
   - component: {fileID: 2027870415}
-  - component: {fileID: 2027870418}
   - component: {fileID: 2027870420}
+  - component: {fileID: 2027870418}
   - component: {fileID: 2027870421}
   - component: {fileID: 2027870417}
   - component: {fileID: 2027870423}
@@ -33865,9 +33868,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10000
-  moveSpeed: 0
+  moveSpeed: 10
   blockTime: 0.5
   dodgeTime: 20
+  dodgeDistance: 5
   currentState: 0
 --- !u!50 &2027870418
 Rigidbody2D:
@@ -33882,7 +33886,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -33903,14 +33907,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rb: {fileID: 2027870418}
   cam: {fileID: 1757653798}
-  animator: {fileID: 2027870420}
-  rend: {fileID: 2027870415}
   weapon: {fileID: 1029887628}
   cursor: {fileID: 1694453876}
-  attack: {fileID: 2027870422}
-  entity: {fileID: 2027870417}
 --- !u!95 &2027870420
 Animator:
   serializedVersion: 3
@@ -34264,6 +34263,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795792601274245926, guid: 2201b0d8050e0b042b76ee26eb0d799f,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795792601274245924, guid: 2201b0d8050e0b042b76ee26eb0d799f,
+        type: 3}
+      propertyPath: dodgeDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4795792601274245925, guid: 2201b0d8050e0b042b76ee26eb0d799f,
         type: 3}

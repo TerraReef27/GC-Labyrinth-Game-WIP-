@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class NewPlayerController : MonoBehaviour
 {
-    private Vector3 movement;
+    private Vector2 movement;
 
     private Entity selfEntity;
     private Entity_Attack attack = null;
+    private Rigidbody2D rb = null;
 
     [SerializeField] private GameObject weapon = null;
 
@@ -15,24 +16,24 @@ public class NewPlayerController : MonoBehaviour
     {
         selfEntity = GetComponent<Entity>();
         attack = GetComponent<Entity_Attack>();
-    }
-
-    void Start()
-    {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
     
     void Update()
     {
-        movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        GetWeaponSwitchInputs();
+        movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(selfEntity.currentState == Entity.EntityState.Neutral)
-            transform.position += Vector3.ClampMagnitude(movement, selfEntity.MoveSpeed) * selfEntity.MoveSpeed * Time.deltaTime;
-
-        if(Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             selfEntity.Dodge(movement);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (selfEntity.currentState == Entity.EntityState.Neutral)
+            rb.MovePosition(rb.position + Vector2.ClampMagnitude(movement, selfEntity.MoveSpeed) * selfEntity.MoveSpeed * Time.fixedDeltaTime);
     }
 
     private void GetWeaponSwitchInputs()

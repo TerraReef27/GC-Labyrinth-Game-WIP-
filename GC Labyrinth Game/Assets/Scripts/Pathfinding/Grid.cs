@@ -29,7 +29,7 @@ public class PathGrid<T>
         }
         Debug.DrawLine(GetWorldPos(0, height), GetWorldPos(width, height), Color.green, 1000f);
         Debug.DrawLine(GetWorldPos(width, 0), GetWorldPos(width, height), Color.green, 1000f);
-        */
+        */  
     }
 
     private Vector3 GetWorldPos(int x, int y)

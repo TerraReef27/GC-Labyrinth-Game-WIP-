@@ -33,6 +33,8 @@ public class PathfindingGrid : MonoBehaviour
         }
     }
     
+    /*
+     * FOR DEBUG
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -49,5 +51,5 @@ public class PathfindingGrid : MonoBehaviour
             
         }
     }
-    
+    */
 }

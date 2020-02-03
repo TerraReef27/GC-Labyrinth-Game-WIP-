@@ -1,29 +1,35 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
 
-    [SerializeField] private Rigidbody2D rb = null;
-    [SerializeField] private Camera cam = null;
-    [SerializeField] private Animator animator = null;
-    [SerializeField] private SpriteRenderer rend = null;
+    private Rigidbody2D rb = null;
+    private Animator animator = null;
+    private SpriteRenderer rend = null;
 
+    [SerializeField] private Camera cam = null;
     [SerializeField] private GameObject weapon = null;
     [SerializeField] private GameObject cursor = null;
 
 
-    [SerializeField] private Entity_Attack attack = null;
-    [SerializeField] private Entity entity = null;
+    private Entity_Attack attack = null;
+    private Entity selfEntity = null;
     
     private Vector2 movement;
     private Vector2 mousePos;
 
     private float angle;
 
+
+    private void Awake()
+    {
+        selfEntity = GetComponent<Entity>();
+        attack = GetComponent<Entity_Attack>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
+    }
     void Update()
     {
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -49,18 +55,20 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetButtonDown("Fire2"))
         {
-           entity.Dodge((mousePos - new Vector2(transform.position.x, transform.position.y)).normalized);
+            //selfEntity.Dodge((mousePos - new Vector2(transform.position.x, transform.position.y)).normalized);
+            selfEntity.Dodge(movement);
         }
         if (Input.GetButtonDown("Block"))
         {
-            StartCoroutine(entity.Block());
+            StartCoroutine(selfEntity.Block());
         }
         GetWeaponSwitchInputs();
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        if (selfEntity.currentState == Entity.EntityState.Neutral)
+            rb.MovePosition(rb.position + Vector2.ClampMagnitude(movement, selfEntity.MoveSpeed) * selfEntity.MoveSpeed * Time.fixedDeltaTime);
 
         Vector3 facing = mousePos - rb.position;
         angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;
