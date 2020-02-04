@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private Entity entity = null;
+    private Entity selfEntitiy = null;
+    private Rigidbody2D rb = null;
     private Entity_Attack attack = null;
     [Tooltip("What the AI goes towords or away from. Leave empty to target player")]
     [SerializeField] private GameObject target = null;
@@ -23,8 +24,8 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
-        entity = GetComponent<Entity>();
-
+        selfEntitiy = GetComponent<Entity>();
+        rb = GetComponent<Rigidbody2D>();
         if(GetComponent<Entity_Attack>() != null)
             attack = GetComponent<Entity_Attack>();
     }
@@ -42,7 +43,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(target != null)
         {
-
+            TrackTarget();
             //movementDir = target.transform.position - transform.position;
             //movementDir.Normalize();
         }
@@ -50,10 +51,10 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        FollowTarget();
+         FollowTarget();
     }
 
-    private void FollowTarget()
+    private void TrackTarget()
     {
         if (target != null)
         {
@@ -72,10 +73,9 @@ public class EnemyAI : MonoBehaviour
             }
             */
         }
-        FindTarget();
     }
 
-    private void FindTarget()
+    private void FollowTarget()
     {
         if(target != null)
         {
@@ -87,7 +87,7 @@ public class EnemyAI : MonoBehaviour
             {
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    //Debug.DrawLine(new Vector3(underPath[i].GetX(), underPath[i].GetY()) + Vector3.one, new Vector3(underPath[i + 1].GetX(), underPath[i + 1].GetY()) + Vector3.one, Color.cyan);
+                    Debug.DrawLine(new Vector3(underPath[i].GetX(), underPath[i].GetY()) + Vector3.one, new Vector3(underPath[i + 1].GetX(), underPath[i + 1].GetY()) + Vector3.one, Color.cyan);
                 }
             }
         }
@@ -100,8 +100,11 @@ public class EnemyAI : MonoBehaviour
             Vector3 moveTo = path[currentPathIndex];
             if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
             {
-                Vector2 moveDir = (moveTo - transform.position).normalized;
-                transform.position += Vector3.ClampMagnitude(moveDir, entity.MoveSpeed) * entity.MoveSpeed * Time.deltaTime;
+                Vector2 moveDir = (moveTo - transform.position);
+                Debug.Log(moveDir);
+                moveDir.Normalize();
+                //transform.position += Vector3.ClampMagnitude(moveDir, selfEntitiy.MoveSpeed) * selfEntitiy.MoveSpeed * Time.deltaTime;
+                rb.AddForce(moveDir * selfEntitiy.ForceSpeed);
             }
             else
             {
@@ -114,8 +117,8 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            path = null;
-            attack.Attack();
+            //path = null;
+            //attack.Attack();
         }
     }
     

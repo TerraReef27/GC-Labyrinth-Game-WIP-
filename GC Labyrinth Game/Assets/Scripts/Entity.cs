@@ -7,6 +7,8 @@ public class Entity : MonoBehaviour
     #region variables
     [SerializeField] private float hp;
     [SerializeField] private float moveSpeed;
+    [Tooltip("The amount of force applied to the entity when force is used for movement")]
+    private float forceSpeed = 1000f;
     [SerializeField] private float blockTime = .5f;
     [SerializeField] private int dodgeTime = 10;
 
@@ -16,7 +18,8 @@ public class Entity : MonoBehaviour
 
     private DamageHandler dh = null;
 
-    public float MoveSpeed { get { return moveSpeed; } private set { moveSpeed = value; } }
+    public float MoveSpeed { get { return moveSpeed; } private set { moveSpeed = value;  forceSpeed = 1000 * moveSpeed; } }
+    public float ForceSpeed { get { return forceSpeed; } private set { forceSpeed = value; } }
     public float Health { get { return hp; } set { hp = value; } }
 
     public enum EntityState{ Neutral, Blocking, Dodging, KnockedBack }
@@ -33,6 +36,7 @@ public class Entity : MonoBehaviour
     void Start()
     {
         currentState = EntityState.Neutral;
+        forceSpeed = moveSpeed * 1000;
     }
 
     public void TakeDamage(float damage)
@@ -110,7 +114,6 @@ public class Entity : MonoBehaviour
 
     public IEnumerator ApplyKnockback(Vector2 knockbackDirection, float knockbackPower)
     {
-        Debug.Log("Knocking back");
         currentState = EntityState.KnockedBack;
 
         float knockbackForce = knockbackPower * 10000;
@@ -123,6 +126,5 @@ public class Entity : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         currentState = EntityState.Neutral;
-        Debug.Log("Ending knockback");
     }
 }
