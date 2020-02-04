@@ -33,29 +33,38 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        animator.SetFloat("X_WalkValue", Input.GetAxisRaw("Horizontal"));
-        animator.SetFloat("Y_WalkValue", Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        //POSSIBLY CHANGE LATER ONCE DODGE ANIMATION IS ADDED IN
+        if (selfEntity.currentState == Entity.EntityState.Neutral)
         {
-            rend.flipX = true;
-        }
-        else
-        {
-            rend.flipX = false;
+            animator.SetFloat("X_WalkValue", Input.GetAxisRaw("Horizontal"));
+            animator.SetFloat("Y_WalkValue", Input.GetAxisRaw("Vertical"));
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                attack.Attack();
+            }
+
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                rend.flipX = true;
+            }
+            else
+            {
+                rend.flipX = false;
+            }
         }
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         cursor.transform.position = mousePos;
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            attack.Attack();
-        }
+        
         if(Input.GetButtonDown("Fire2"))
         {
-            //selfEntity.Dodge((mousePos - new Vector2(transform.position.x, transform.position.y)).normalized);
+            /*
+             * For dodgeing in the mouse direction
+             * selfEntity.Dodge((mousePos - new Vector2(transform.position.x, transform.position.y)).normalized);
+             */
             selfEntity.Dodge(movement);
         }
         if (Input.GetButtonDown("Block"))

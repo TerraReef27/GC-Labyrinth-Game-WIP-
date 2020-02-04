@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private float hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float blockTime = .5f;
-    [SerializeField] private int dodgeFrames = 10;
+    [SerializeField] private int dodgeTime = 10;
 
     [SerializeField] private float dodgeForce = 25000f;
 
@@ -19,7 +19,7 @@ public class Entity : MonoBehaviour
     public float MoveSpeed { get { return moveSpeed; } private set { moveSpeed = value; } }
     public float Health { get { return hp; } set { hp = value; } }
 
-    public enum EntityState{ Neutral, Blocking, Dodging }
+    public enum EntityState{ Neutral, Blocking, Dodging, KnockedBack }
     public EntityState currentState = EntityState.Neutral;
 
     #endregion variables
@@ -73,16 +73,18 @@ public class Entity : MonoBehaviour
     {
         currentState = EntityState.Dodging;
 
-        float currentDodgeTime = dodgeFrames;
-        float moveDistance = dodgeForce / dodgeFrames;
+        float currentDodgeTime = dodgeTime;
+        //float moveDistance = dodgeForce / dodgeFrames;
+
+        rb.velocity = Vector2.zero;
 
         while(currentDodgeTime >= 1)
         {
             if (direction != Vector2.zero)
-                rb.AddForce(direction * moveDistance * Time.fixedDeltaTime);
+                rb.AddForce(direction * dodgeForce * Time.fixedDeltaTime);
                 //rb.MovePosition(rb.position + direction * dodgeForce * Time.fixedDeltaTime);
             else
-                rb.AddForce(Vector2.down * moveDistance * Time.fixedDeltaTime);
+                rb.AddForce(Vector2.down * dodgeForce * Time.fixedDeltaTime);
                 //rb.MovePosition(rb.position + Vctor2.down * dodgeForce * Time.fixedDeltaTime);
             currentDodgeTime--;
             yield return new WaitForEndOfFrame();
@@ -92,7 +94,7 @@ public class Entity : MonoBehaviour
     private IEnumerator MoveDodge(Vector3 dodgeDirection)
     {
         currentState = EntityState.Dodging;
-        float currentDodgeTime = dodgeFrames;
+        float currentDodgeTime = dodgeTime;
         
         while(currentDodgeTime >= 1)
         {
@@ -106,15 +108,21 @@ public class Entity : MonoBehaviour
         currentState = EntityState.Neutral;
     }
 
-    public IEnumerator ApplyKnockback(Vector3 knockbackDirection, float knockbackPower)
+    public IEnumerator ApplyKnockback(Vector2 knockbackDirection, float knockbackPower)
     {
         Debug.Log("Knocking back");
+        currentState = EntityState.KnockedBack;
+
+        float knockbackForce = knockbackPower * 10000;
+        Vector2 dir = knockbackDirection.normalized;
         while (knockbackPower >= 1)
         {
-            transform.position += knockbackDirection * knockbackPower * Time.deltaTime;
+            //transform.position += knockbackDirection * knockbackPower * Time.deltaTime;
+            rb.AddForce(dir * knockbackForce * Time.fixedDeltaTime);
             knockbackPower -= 1;
             yield return new WaitForEndOfFrame();
         }
+        currentState = EntityState.Neutral;
         Debug.Log("Ending knockback");
     }
 }

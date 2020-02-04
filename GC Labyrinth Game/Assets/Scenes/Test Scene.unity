@@ -220,8 +220,8 @@ MonoBehaviour:
   hp: 100
   moveSpeed: 4.5
   blockTime: 0.5
-  dodgeTime: 0.5
-  dodgeDistance: 0
+  dodgeTime: 10
+  dodgeForce: 1
   currentState: 0
 --- !u!114 &146411378
 MonoBehaviour:
@@ -33039,8 +33039,8 @@ MonoBehaviour:
   hp: 100
   moveSpeed: 4.5
   blockTime: 0.5
-  dodgeTime: 0.5
-  dodgeDistance: 0
+  dodgeTime: 10
+  dodgeForce: 1
   currentState: 0
 --- !u!114 &630131050
 MonoBehaviour:
@@ -33386,8 +33386,8 @@ MonoBehaviour:
   hp: 100
   moveSpeed: 4.5
   blockTime: 0.5
-  dodgeTime: 0.5
-  dodgeDistance: 0
+  dodgeTime: 10
+  dodgeForce: 1
   currentState: 0
 --- !u!114 &1639211619
 MonoBehaviour:
@@ -33867,11 +33867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107d14c3b3303994c9d46e7152ba7af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10000
+  hp: 25000
   moveSpeed: 10
   blockTime: 0.5
   dodgeTime: 20
-  dodgeDistance: 5
+  dodgeForce: 10000
   currentState: 0
 --- !u!50 &2027870418
 Rigidbody2D:
@@ -34051,6 +34051,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 876337739811737704, guid: 176610d7336db9c43a694ff81018bd0e,
+        type: 3}
+      propertyPath: knockback
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 876337739811737704, guid: 176610d7336db9c43a694ff81018bd0e,
+        type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 876337739811737706, guid: 176610d7336db9c43a694ff81018bd0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34105,11 +34115,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
-      objectReference: {fileID: 0}
-    - target: {fileID: 876337739811737704, guid: 176610d7336db9c43a694ff81018bd0e,
-        type: 3}
-      propertyPath: knockback
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176610d7336db9c43a694ff81018bd0e, type: 3}
@@ -34278,6 +34283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667625642337749484, guid: 2201b0d8050e0b042b76ee26eb0d799f,
+        type: 3}
+      propertyPath: knockback
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2201b0d8050e0b042b76ee26eb0d799f, type: 3}
