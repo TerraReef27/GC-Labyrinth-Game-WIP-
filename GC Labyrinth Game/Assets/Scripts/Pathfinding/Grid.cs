@@ -56,7 +56,7 @@ public class PathGrid<T>
 
     public void SetGridObject(int x, int y, T value)
     {
-        if ((x >= 0 && y >= 0) && (x < width && y < height))
+        if ((x >= 0 && y >= 0) && (x <= width && y <= height))
             gridArray[x, y] = value;
     }
     public void SetGridObject(Vector3 pos, T value)
@@ -100,5 +100,10 @@ public class PathGrid<T>
     public float GetCellSize()
     {
         return cellSize;
+    }
+
+    public Vector2 GetOrigin()
+    {
+        return origin;
     }
 }

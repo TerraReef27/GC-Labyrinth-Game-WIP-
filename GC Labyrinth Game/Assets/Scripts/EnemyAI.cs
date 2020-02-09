@@ -82,6 +82,7 @@ public class EnemyAI : MonoBehaviour
             path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
             FollowPath(path);
 
+            //FOR DEBUG
             underPath = AIPathfiding.instance.FindTarget(gameObject.transform.position, target.transform.position);
             if (path != null)
             {
@@ -101,7 +102,9 @@ public class EnemyAI : MonoBehaviour
             if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
             {
                 Vector2 moveDir = (moveTo - transform.position);
-                Debug.Log(moveDir);
+                //Debug.Log("Path is: " + path[currentPathIndex]);
+                //Debug.Log("Mocement Direction: " + moveDir);
+                //Debug.Break();
                 moveDir.Normalize();
                 //transform.position += Vector3.ClampMagnitude(moveDir, selfEntitiy.MoveSpeed) * selfEntitiy.MoveSpeed * Time.deltaTime;
                 rb.AddForce(moveDir * selfEntitiy.ForceSpeed);

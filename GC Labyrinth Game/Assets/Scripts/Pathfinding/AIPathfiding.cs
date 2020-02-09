@@ -4,7 +4,7 @@ using UnityEngine;
 public class AIPathfiding
 {
     private const int HorizontalMovePrice = 10;
-    private const int DiagonalMovePrice = 14;
+    private const int DiagonalMovePrice = 14; //14
 
     private PathGrid<PathfindingNode> grid;
 
@@ -46,6 +46,11 @@ public class AIPathfiding
 
     public List<PathfindingNode> FindTarget(Vector2 startPos, Vector2 endPos)
     {
+        if (startPos.x < grid.GetOrigin().x || startPos.x > grid.GetOrigin().x + grid.GetGridWidth())
+            return null;
+        else if (startPos.y < grid.GetOrigin().y || startPos.y > grid.GetOrigin().y + grid.GetGridHeight())
+            return null;
+
         if(grid.GetGridObject(endPos) == null)
         {
             return null;
@@ -128,7 +133,7 @@ public class AIPathfiding
             neighbors.Add(GetNode(centerNode.GetX() - 1, centerNode.GetY()));
             if(centerNode.GetY() - 1 >= 0)
                 neighbors.Add(GetNode(centerNode.GetX() - 1, centerNode.GetY() - 1));
-            if (centerNode.GetY() + 1 >= 0)
+            if (centerNode.GetY() + 1 < grid.GetGridHeight())
                 neighbors.Add(GetNode(centerNode.GetX() - 1, centerNode.GetY() + 1));
         }
         if (centerNode.GetX() + 1 < grid.GetGridWidth())
@@ -136,7 +141,7 @@ public class AIPathfiding
             neighbors.Add(GetNode(centerNode.GetX() + 1, centerNode.GetY()));
             if (centerNode.GetY() - 1 >= 0)
                 neighbors.Add(GetNode(centerNode.GetX() + 1, centerNode.GetY() - 1));
-            if (centerNode.GetY() + 1 >= 0)
+            if (centerNode.GetY() + 1 < grid.GetGridHeight())
                 neighbors.Add(GetNode(centerNode.GetX() + 1, centerNode.GetY() + 1));
         }
         if(centerNode.GetY() - 1 >= 0)
