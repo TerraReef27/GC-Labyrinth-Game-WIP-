@@ -8,16 +8,19 @@ public class EntitiyPathfinding : MonoBehaviour
 
     private Vector2 mousePos;
 
-    void Start()
+    void Awake()
     {
         pathfinding = new AIPathfiding(20, 20, Vector3.zero);
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GotToTarget();
+    }
+
+    private void GotToTarget()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             List<PathfindingNode> path = pathfinding.FindTarget(gameObject.transform.position, mousePos);

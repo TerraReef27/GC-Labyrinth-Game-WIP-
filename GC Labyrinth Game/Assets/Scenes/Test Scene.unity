@@ -205,6 +205,7 @@ MonoBehaviour:
   target: {fileID: 0}
   stopDistance: 3.2
   weapon: {fileID: 387197936}
+  moveTo: {x: 0, y: 0, z: 0}
 --- !u!114 &146411377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32430,6 +32431,7 @@ MonoBehaviour:
   target: {fileID: 0}
   stopDistance: 3.2
   weapon: {fileID: 723116603}
+  moveTo: {x: 0, y: 0, z: 0}
 --- !u!114 &630131049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32753,11 +32755,16 @@ PrefabInstance:
     - target: {fileID: 4795792601274245924, guid: 2201b0d8050e0b042b76ee26eb0d799f,
         type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4795792601274245925, guid: 2201b0d8050e0b042b76ee26eb0d799f,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795792601274245925, guid: 2201b0d8050e0b042b76ee26eb0d799f,
+        type: 3}
+      propertyPath: stopDistance
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5667625642337749484, guid: 2201b0d8050e0b042b76ee26eb0d799f,
@@ -32901,6 +32908,7 @@ MonoBehaviour:
   target: {fileID: 0}
   stopDistance: 6
   weapon: {fileID: 580595091}
+  moveTo: {x: 0, y: 0, z: 0}
 --- !u!114 &1639211618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33376,7 +33384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027870414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.12, y: 15.24, z: 0}
+  m_LocalPosition: {x: 9.12, y: 10.55, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 377750256}

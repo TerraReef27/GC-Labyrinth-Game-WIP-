@@ -26,7 +26,6 @@ public class PathfindingGrid : MonoBehaviour
                 Vector3Int localArea = new Vector3Int(pos.x, pos.y, pos.z);
                 if (collisions.HasTile(localArea))
                 {
-                    Debug.Log("Tile is now unwalkable");
                     pathfinding.GetGrid().GetGridObject(pos).isWalkable = false;
                 }
             }
@@ -34,7 +33,8 @@ public class PathfindingGrid : MonoBehaviour
     }
     
     
-     // FOR DEBUG
+    // FOR DEBUG
+    /*
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -51,5 +51,6 @@ public class PathfindingGrid : MonoBehaviour
             
         }
     }
+    */
     
 }

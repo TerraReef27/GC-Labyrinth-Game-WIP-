@@ -32,7 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        currentPathIndex = 0;
+        //currentPathIndex = 0;
 
         if(target == null)
             ChangeTarget();
@@ -46,6 +46,7 @@ public class EnemyAI : MonoBehaviour
             TrackTarget();
             //movementDir = target.transform.position - transform.position;
             //movementDir.Normalize();
+            SetTargetPosition(target.transform.position);
         }
     }
 
@@ -79,7 +80,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(target != null)
         {
-            path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
+            //Moved to Update for preformance   path = AIPathfiding.instance.FindPath(gameObject.transform.position, target.transform.position);
             FollowPath(path);
 
             //FOR DEBUG
@@ -94,18 +95,20 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public Vector3 moveTo;
     private void FollowPath(List<Vector3> path)
     {
-        if(path != null)
+        if (path != null)
         {
-            Vector3 moveTo = path[currentPathIndex];
-            if(Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
+            //Vector3 moveTo = path[currentPathIndex];
+            moveTo = path[currentPathIndex];
+            if (Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
             {
-                Vector2 moveDir = (moveTo - transform.position);
+                Vector2 moveDir = (moveTo - transform.position).normalized;
+                //Debug.Log(moveDir);
                 //Debug.Log("Path is: " + path[currentPathIndex]);
                 //Debug.Log("Mocement Direction: " + moveDir);
                 //Debug.Break();
-                moveDir.Normalize();
                 //transform.position += Vector3.ClampMagnitude(moveDir, selfEntitiy.MoveSpeed) * selfEntitiy.MoveSpeed * Time.deltaTime;
                 rb.AddForce(moveDir * selfEntitiy.ForceSpeed);
             }
@@ -125,6 +128,17 @@ public class EnemyAI : MonoBehaviour
         }
     }
     
+    public void SetTargetPosition(Vector3 target)
+    {
+        currentPathIndex = 0;
+        path = AIPathfiding.instance.FindPath(transform.position, target);
+
+        if(path != null && path.Count > 1)
+        {
+            path.RemoveAt(0);
+        }
+    }
+
     private void ChangeTarget(GameObject newTarget)
     {
         target = newTarget;
