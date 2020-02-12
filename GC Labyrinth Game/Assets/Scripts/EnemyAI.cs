@@ -18,7 +18,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject weapon = null;
 
     private List<Vector3> path;
-    private int currentPathIndex;
 
     private List<PathfindingNode> underPath;
 
@@ -95,30 +94,28 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public Vector3 moveTo;
     private void FollowPath(List<Vector3> path)
     {
         if (path != null)
         {
-            //Vector3 moveTo = path[currentPathIndex];
-            moveTo = path[currentPathIndex];
-            if (Vector3.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
+            if(path.Count > 1)
             {
-                Vector2 moveDir = (moveTo - transform.position).normalized;
-                //Debug.Log(moveDir);
-                //Debug.Log("Path is: " + path[currentPathIndex]);
-                //Debug.Log("Mocement Direction: " + moveDir);
-                //Debug.Break();
-                //transform.position += Vector3.ClampMagnitude(moveDir, selfEntitiy.MoveSpeed) * selfEntitiy.MoveSpeed * Time.deltaTime;
-                rb.AddForce(moveDir * selfEntitiy.ForceSpeed);
+                Vector3 moveTo = path[1];
+
+                if (Vector2.Distance(transform.position, moveTo) > .1f && Vector2.Distance(transform.position, target.transform.position) > stopDistance)
+                {
+                    Vector2 moveDir = (moveTo - transform.position).normalized;
+                    //Debug.Log(moveDir);
+                    //Debug.Log("Path is: " + path[currentPathIndex]);
+                    //Debug.Log("Mocement Direction: " + moveDir);
+                    //Debug.Break();
+                    //transform.position += Vector3.ClampMagnitude(moveDir, selfEntitiy.MoveSpeed) * selfEntitiy.MoveSpeed * Time.deltaTime;
+                    rb.AddForce(moveDir * selfEntitiy.ForceSpeed);
+                }
             }
             else
             {
-                currentPathIndex++;
-                if(currentPathIndex >= path.Count)
-                {
-                    attack.Attack();
-                }
+                attack.Attack();
             }
         }
         else
@@ -130,7 +127,6 @@ public class EnemyAI : MonoBehaviour
     
     public void SetTargetPosition(Vector3 target)
     {
-        currentPathIndex = 0;
         path = AIPathfiding.instance.FindPath(transform.position, target);
 
         if(path != null && path.Count > 1)
