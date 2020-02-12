@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PathfindingGrid : MonoBehaviour
 {
     private AIPathfiding pathfinding;
 
-    [SerializeField] int x = 0, y = 0;
+    [SerializeField] int x = 30, y = 30;
     [SerializeField] Vector3 origin = Vector3.zero;
     
     private Vector2 mousePos;
@@ -15,10 +13,13 @@ public class PathfindingGrid : MonoBehaviour
 
     [SerializeField] Tilemap collisions = null;
 
-    void Start()
+    void Awake()
     {
         pathfinding = new AIPathfiding(x, y, origin);
+    }
 
+    void Start()
+    {
         if(collisions != null)
         {
             foreach (var pos in collisions.cellBounds.allPositionsWithin)

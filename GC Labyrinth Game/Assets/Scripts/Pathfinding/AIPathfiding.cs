@@ -4,7 +4,7 @@ using UnityEngine;
 public class AIPathfiding
 {
     private const int HorizontalMovePrice = 10;
-    private const int DiagonalMovePrice = 14; //14
+    private const int DiagonalMovePrice = 14;
 
     private PathGrid<PathfindingNode> grid;
 
@@ -16,10 +16,11 @@ public class AIPathfiding
     public AIPathfiding(int x, int y, Vector3 origin)
     {
         instance = this;
+
         grid = new PathGrid<PathfindingNode>(x, y, 1f, origin);
-        for (int i = 0; i < grid.GetGridWidth(); i++)
+        for (int i = 0; i < x; i++)
         {
-            for (int j = 0; j < grid.GetGridHeight(); j++)
+            for (int j = 0; j < y; j++)
             {
                 PathfindingNode newNode = new PathfindingNode(grid, i, j);
                 grid.SetGridObject(i, j, newNode);
@@ -95,6 +96,7 @@ public class AIPathfiding
                 if(!neighbor.isWalkable)
                 {
                     closedNodes.Add(neighbor);
+                    Debug.Log("Node is now Unwalkable");
                     /*
                     for(int i = -2; i < 3; i++)
                     {
